@@ -24,9 +24,14 @@ class Usuarios extends Component {
         `Tem certeza que deseja remover "${usuario.nome} ${usuario.sobrenome}"?`
       )
     ) {
-      let usuarios = this.state.usuarios;
-      usuarios = usuarios.filter((x) => x.id !== usuario.id);
-      this.setState({ usuarios: usuarios });
+      fetch(`https://reqres.in/api/users/${usuario.id}`, {
+        method: "DELETE",
+      }).then((response) => {
+        console.log(response);
+        let usuarios = this.state.usuarios;
+        usuarios = usuarios.filter((x) => x.id !== usuario.id);
+        this.setState({ usuarios: usuarios });
+      });
     }
   }
 
